@@ -3,7 +3,7 @@ package com.example.nikhil.internshalaproject.service;
 import android.app.Application;
 
 import com.example.nikhil.internshalaproject.R;
-
+// activity instance associated with application for giving the service object to the calling class
 public class RxApplication extends Application {
 
     private NetworkService networkService;

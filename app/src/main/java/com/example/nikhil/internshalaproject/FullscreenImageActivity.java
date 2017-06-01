@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-
+// activity for showing the full screen image
 public class FullscreenImageActivity extends AppCompatActivity {
 
     @Override

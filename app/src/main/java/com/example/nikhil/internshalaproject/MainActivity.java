@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.nikhil.internshalaproject.model.WorldPopulation;
 import com.example.nikhil.internshalaproject.model.WorldPopulationModelResponse;
@@ -38,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
         images = new ArrayList<String>();
         service = ((RxApplication)getApplication()).getNetworkService();
         presenter = new PresentationLayer(this, service);
-        if(savedInstanceState!=null){
-            rxCallInWorks = savedInstanceState.getBoolean(EXTRA_RX);
+        final boolean flag = NetworkTest.CheckConnection(context);
+        if (flag) {
+            presenter.loadRxData(this);
+        } else {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
-        presenter.loadRxData(this);
     }
 
     @Override
@@ -49,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         presenter.rxUnSubscribe();
 
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(EXTRA_RX, rxCallInWorks);
     }
 
     public void showRxResults(WorldPopulationModelResponse worldPopulationModelResponse) {
@@ -85,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(imageGridAdapter);
+        // pass the list of images url to the adapter
         imageGridAdapter.addAll(images);
 
     }

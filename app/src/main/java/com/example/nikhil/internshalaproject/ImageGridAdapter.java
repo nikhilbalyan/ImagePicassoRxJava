@@ -1,6 +1,7 @@
 package com.example.nikhil.internshalaproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,7 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Imag
         for (String str : imageList) {
             add(str);
         }
+        // notifying the adapter about the data set changed
         notifyDataSetChanged();
     }
 
@@ -75,7 +77,9 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Imag
 
         @Override
         public void onClick(View view) {
-            SharedActivity.showFullscreenImage(context, imageList.get(getAdapterPosition()));
+            Intent intent=new Intent("android.intent.action.FULLSCREENIMAGEPAGE");
+            intent.putExtra("Image URL", imageList.get(getAdapterPosition()));
+            context.startActivity(intent);
         }
     }
 }

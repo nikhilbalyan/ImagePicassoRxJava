@@ -11,10 +11,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 
-/**
- * Created by nikhil on 12/5/17.
- */
-
 @SuppressWarnings("unchecked")
 public class PresentationLayer implements PresenterInteractor{
 
